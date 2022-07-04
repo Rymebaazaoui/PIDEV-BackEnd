@@ -38,7 +38,7 @@ module.exports = {
       });
     });
     },
-
+/*
     updateFormation: async(req,res) => {
         const { id } = req.params.id;
         console.log(id)
@@ -55,7 +55,24 @@ module.exports = {
         message: "Erreur mise à jour avec id=" + id
       });
     });
-    },
+     */
+     updateFormation: async (req,res, next) => {
+
+        formations.findByIdAndUpdate(req.params.id, {
+            $set: req.body
+          }, (error, data) => {
+            if (error) {
+              return next(error);
+              console.log(error)
+            } else {
+          //    res.json(data)
+          res.send({
+            message: "Formation mise à jour avec succès.!"
+          });
+          //console.log('Formation mise à jour avec succès.!')
+            }
+          })
+        },
     searchFormation: async(req,res) => {
         const id = req.params.id;
         formations.findById(id)
