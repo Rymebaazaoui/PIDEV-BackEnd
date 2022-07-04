@@ -5,22 +5,10 @@ const ParadeController = require("../controllers/parade.controller");
 
 
 router.get('/', ParadeController.showAllparade);
-router.post('/create', ParadeController.create);
-router.get('/deleteParade/:id', ParadeController.deleteParadeById);
-
-
-
-
-/* GET users listing. */
-
-/*router.get('/', function(req, res, next) {
-    Parade.find((err, data)=>{
-        res.json(data);
-        
-    });
-   
-});*/
-
+router.get('/searchParade/:id', ParadeController.searchParade);
+router.post('/createParade', ParadeController.createParade);
+router.delete('/deleteParadeById/:id', ParadeController.deleteParadeById);
+router.put('/updateParade/:id', ParadeController.updateParade);
 
 
 module.exports = router;
