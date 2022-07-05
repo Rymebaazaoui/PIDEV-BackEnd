@@ -1,5 +1,6 @@
 const { findByIdAndRemove } = require('../model/formations.model');
 let  formations = require('../model/formations.model')
+var type_Formation= require('../model/type_formation.model');
 
 
 module.exports = {
@@ -86,7 +87,7 @@ module.exports = {
               .status(500)
               .send({ message: "Erreur recuperation formation avec id=" + id });
           });
-      }
+      },
 
 
  /* deleteFormationById: async (req, res) => {
@@ -98,6 +99,52 @@ module.exports = {
           });
           res.redirect('/api/formation');
 
-    },*/ 
+    },*/
+    
+    addFormationType : async(req,res)=>{
+
+      console.log(">>>>>>>>>");
+    console.log(req.body);
+    const { id } = req.params;
+    console.log(">>>>>>>>>");
+    type_Formation=await type_Formation.findById(id);
+    console.log(">>>>>>>>>"+type_Formation);
+    var f= new formations({
+//    DateDebut : req.body.DateDebut,
+//    DateFin: {type:Date,default:Date.now},	
+    Description: req.body.Description,			
+    TitreDeFormation: req.body.TitreDeFormation,		
+    Type : req.body.type_Formation
+  });
+  console.log("avant");
+
+  f.save();
+  res.send({
+    message: "Ajout effectué avec succès!"
+  });
+//  console.log("formation ajoutée avec succès ");
+  console.log(f);
+    },
+/*
+router.put('/update/:id', async function(req,res){
+  try{
+    await EspeceAnimale.findByIdAndUpdate({_id:req.params.id},{
+      description: req.body.description,		
+      isChassable: req.body.isChassable,		
+      maniereProt: req.body.maniereProt,		
+      methodeChasse: req.body.methodeChasse,		
+      image: req.body.image,		
+      lieu: req.body.lieu,		
+      periodeReprod: req.body.periodeReprod,	
+      isActive: req.body.isActive
+    })
+    res.send("mise à jours effectuée avec succès")
+  }
+  catch{
+    res.send(err);
+  }
+})
+*/
+
     
 }
