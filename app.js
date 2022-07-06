@@ -21,8 +21,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var paradeRouter = require('./routes/Parades.route');
 var formationsRouter = require('./routes/formations.routes');
-
-
+var visiteRouter = require('./routes/visite.route');
 var app = express();
 
 // view engine setup
@@ -39,6 +38,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/parade', paradeRouter);
 app.use('/formation', formationsRouter);
+app.use('/visite', visiteRouter);
 app.use(cors());
 app.use(bodyParser.json())
 app.use(
@@ -49,6 +49,7 @@ app.use(
 // API root
 app.use('/api', paradeRouter)
 app.use('/api', formationsRouter)
+app.use('/api', visiteRouter)
 // PORT
 const port = process.env.PORT || 8000
 app.listen(port, () => {
