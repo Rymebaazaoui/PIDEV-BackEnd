@@ -21,6 +21,9 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var paradeRouter = require('./routes/Parades.route');
 var formationsRouter = require('./routes/formations.routes');
+var veloRouter = require('./routes/Velos.route');
+var reservationRouter = require('./routes/Reservations.route');
+
 
 
 var app = express();
@@ -34,11 +37,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'uploads')));
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/parade', paradeRouter);
 app.use('/formation', formationsRouter);
+app.use('/velo', veloRouter);
+app.use('/reservation', reservationRouter);
+
+
 app.use(cors());
 app.use(bodyParser.json())
 app.use(
@@ -49,6 +58,10 @@ app.use(
 // API root
 app.use('/api', paradeRouter)
 app.use('/api', formationsRouter)
+app.use('/api', veloRouter)
+app.use('/api', reservationRouter)
+
+
 // PORT
 const port = process.env.PORT || 8000
 app.listen(port, () => {
