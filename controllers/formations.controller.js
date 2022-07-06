@@ -1,5 +1,7 @@
 const { findByIdAndRemove } = require('../model/formations.model');
+const Formation = require('../model/formations.model');
 let  formations = require('../model/formations.model')
+var type_Formation= require('../model/type_formation');
 
 
 module.exports = {
@@ -38,24 +40,7 @@ module.exports = {
       });
     });
     },
-/*
-    updateFormation: async(req,res) => {
-        const { id } = req.params.id;
-        console.log(id)
-        formations.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
-    .then(data => {
-      if (!data) {
-        res.status(404).send({
-          message: `Impossible de mettre à jour formation avec id=${id}!`
-        });
-      } else res.send({ message: "Formation mise à jour avec succès." });
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: "Erreur mise à jour avec id=" + id
-      });
-    });
-     */
+
      updateFormation: async (req,res, next) => {
 
         formations.findByIdAndUpdate(req.params.id, {
@@ -86,7 +71,7 @@ module.exports = {
               .status(500)
               .send({ message: "Erreur recuperation formation avec id=" + id });
           });
-      }
+      },
 
 
  /* deleteFormationById: async (req, res) => {
@@ -98,6 +83,52 @@ module.exports = {
           });
           res.redirect('/api/formation');
 
-    },*/ 
+    },*/
+    
+    addFormationType : async(req,res)=>{
+
+      console.log(">>>>>>>>>");
+    console.log(req.body);
+    const { id } = req.params;
+    console.log(">>>>>>>>>");
+    type_Formation=await type_Formation.findById(id);
+    console.log(">>>>>>>>>"+type_Formation);
+    var f= new Formation({
+    DateDebut : req.body.DateDebut,
+    DateFin: req.body.DateFin,	
+    Description: req.body.Description,			
+    TitreDeFormation: req.body.TitreDeFormation,		
+    Type : type_Formation
+  });
+  console.log("avant");
+
+  f.save();
+  res.send({
+    message: "Ajout effectué avec succès!"
+  });
+//  console.log("formation ajoutée avec succès ");
+  console.log(f);
+    },
+/*
+router.put('/update/:id', async function(req,res){
+  try{
+    await EspeceAnimale.findByIdAndUpdate({_id:req.params.id},{
+      description: req.body.description,		
+      isChassable: req.body.isChassable,		
+      maniereProt: req.body.maniereProt,		
+      methodeChasse: req.body.methodeChasse,		
+      image: req.body.image,		
+      lieu: req.body.lieu,		
+      periodeReprod: req.body.periodeReprod,	
+      isActive: req.body.isActive
+    })
+    res.send("mise à jours effectuée avec succès")
+  }
+  catch{
+    res.send(err);
+  }
+})
+*/
+
     
 }
