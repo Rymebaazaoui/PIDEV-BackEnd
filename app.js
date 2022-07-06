@@ -42,6 +42,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/parade', paradeRouter);
 app.use('/formation', formationsRouter);
+
 app.use(bodyParser.json())
 app.use(
   bodyParser.urlencoded({
