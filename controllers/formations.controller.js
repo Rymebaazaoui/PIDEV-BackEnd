@@ -50,7 +50,7 @@ module.exports = {
               return next(error);
               console.log(error)
             } else {
-          //    res.json(data)
+          console.log(res.body);
           res.send({
             message: "Formation mise à jour avec succès.!"
           });
@@ -129,6 +129,22 @@ router.put('/update/:id', async function(req,res){
   }
 })
 */
+// updateFormationtype: async (req,res, next) => {
 
+//   formations.findByIdAndUpdate(req.params.id, {
+//       $set: req.body
+//     }, (error, data) => {
+//       if (error) {
+//         return next(error);
+//         console.log(error)
+//       } else {
+//     console.log(res.body);
+//     res.send({
+//       message: "Formation mise à jour avec succès.!"
+//     });
+//     //console.log('Formation mise à jour avec succès.!')
+//       }
+//     })
+//   }
     
 }
