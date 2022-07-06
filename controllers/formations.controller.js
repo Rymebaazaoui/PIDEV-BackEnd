@@ -1,6 +1,7 @@
 const { findByIdAndRemove } = require('../model/formations.model');
+const Formation = require('../model/formations.model');
 let  formations = require('../model/formations.model')
-var type_Formation= require('../model/type_formation.model');
+var type_Formation= require('../model/type_formation');
 
 
 module.exports = {
@@ -39,24 +40,7 @@ module.exports = {
       });
     });
     },
-/*
-    updateFormation: async(req,res) => {
-        const { id } = req.params.id;
-        console.log(id)
-        formations.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
-    .then(data => {
-      if (!data) {
-        res.status(404).send({
-          message: `Impossible de mettre à jour formation avec id=${id}!`
-        });
-      } else res.send({ message: "Formation mise à jour avec succès." });
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: "Erreur mise à jour avec id=" + id
-      });
-    });
-     */
+
      updateFormation: async (req,res, next) => {
 
         formations.findByIdAndUpdate(req.params.id, {
@@ -109,12 +93,12 @@ module.exports = {
     console.log(">>>>>>>>>");
     type_Formation=await type_Formation.findById(id);
     console.log(">>>>>>>>>"+type_Formation);
-    var f= new formations({
-//    DateDebut : req.body.DateDebut,
-//    DateFin: {type:Date,default:Date.now},	
+    var f= new Formation({
+    DateDebut : req.body.DateDebut,
+    DateFin: req.body.DateFin,	
     Description: req.body.Description,			
     TitreDeFormation: req.body.TitreDeFormation,		
-    Type : req.body.type_Formation
+    Type : type_Formation
   });
   console.log("avant");
 

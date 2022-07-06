@@ -5,15 +5,17 @@ var Formation = new Schema({
     NomFormateur:String,
     Description: String,
     NombreDeParticiants: Number,
-    DateDebut: Date,
-    DateFin: Date,
+    DateDebut: String,
+    DateFin: String,
 
     Type :[{ type: Schema.Types.ObjectId, 
-        ref: 'type_formation.model' 
+        ref: 'type_formation' 
     }]
 }
  //{ timestamps: true }
 );
 
-module.exports = mongoose.model('formations', Formation);
+var Formation =mongoose.model('formations', Formation);
+
+module.exports = Formation;
 
