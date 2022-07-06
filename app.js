@@ -21,6 +21,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var paradeRouter = require('./routes/Parades.route');
 var formationsRouter = require('./routes/formations.routes');
+var UserRouter = require('./routes/Users.route');
 
 
 var app = express();
@@ -39,6 +40,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/parade', paradeRouter);
 app.use('/formation', formationsRouter);
+app.use('/user', UserRouter);
 app.use(cors());
 app.use(bodyParser.json())
 app.use(
@@ -46,11 +48,14 @@ app.use(
     extended: false,
   }),
 )
+
+/*
 // API root
 app.use('/api', paradeRouter)
 app.use('/api', formationsRouter)
+app.use('/api', UserRouter)
 // PORT
-const port = process.env.PORT || 8000
+const port = process.env.PORT || 8200
 app.listen(port, () => {
   console.log('Listening on port ' + port)
 })
@@ -60,7 +65,7 @@ app.get('/', (req, res) => {
 })
 app.get('*', (req, res) => {
   res.sendFile(
-    path.join(__dirname, 'C:\Users\User\Desktop\Roue_Libre\RoueLibre\src\app\components\list-parade\list-parade.component.html'),
+    path.join(__dirname, )
   )
 })
 // catch 404 and forward to error handler
@@ -78,5 +83,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+*/
 
 module.exports = app;
