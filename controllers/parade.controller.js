@@ -25,17 +25,10 @@ module.exports = {
         });
     },
 
-    /* createParadeAvecType: async(req,res) =>{
-      const type_parade = req.Type_parade;
-      const parade = new Parade({...req.body});
-      parade.type_parade = type_parade;
-      await parade.save();
-        res.json(parade);
-    },*/
 
     addParadeType : async(req,res)=>{
 
-      console.log(">>>>>>>>>");
+    console.log(">>>>>>>>>");
     console.log(req.body);
     const { id } = req.params;
     console.log(">>>>>>>>>");
@@ -84,6 +77,7 @@ module.exports = {
         });
       });
       },
+
     updateParade: async (req,res, next) => {
 
         Parade.findByIdAndUpdate(req.params.id, {
@@ -95,9 +89,9 @@ module.exports = {
             } else {
              // res.json(data)
              res.send({
-              message: "formation was updated successfully!"
+              message: "Parade was updated successfully!"
             });
             }
           })
-        }
+        }      
 }
