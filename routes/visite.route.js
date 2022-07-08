@@ -1,28 +1,11 @@
 var express = require('express');
 var router = express.Router();
-//var Parade = require('../model/Parades');
 const VisiteController = require("../controllers/visite.controller");
 
-
+router.put('/update/:id',VisiteController.updateVisite)
 router.get('/', VisiteController.showAllvisite);
 router.post('/create', VisiteController.create);
-router.get('/deletevisite/:id', VisiteController.deletevisiteById);
-router.get('/updatevisite/:id', VisiteController.updatevisiteById);
-
-
-
-
-
-/* GET users listing. */
-
-/*router.get('/', function(req, res, next) {
-    Parade.find((err, data)=>{
-        res.json(data);
-
-    });
-
-});*/
-
-
+router.delete('/deleteVisite/:id', VisiteController.deleteVisiteById);
+router.get('/searchVisite/:id', VisiteController.searchVisite);
 
 module.exports = router;
