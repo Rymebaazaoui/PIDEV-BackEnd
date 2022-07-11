@@ -7,20 +7,11 @@ const usersController = require("../controllers/users.controller");
 router.get('/', usersController.showAlluser);
 router.post('/createUser', usersController.createUser);
 router.delete('/deleteUser/:id', usersController.deleteUserById);
+router.put('/updateUser/:id',usersController.updateUser);
+router.get('/searchUser/:id', usersController.searchUser);
 
 
 
-
-
-/* GET users listing. */
-
-/*router.get('/', function(req, res, next) {
-    Parade.find((err, data)=>{
-        res.json(data);
-        
-    });
-   
-});*/
 
 
 
