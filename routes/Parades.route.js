@@ -6,11 +6,12 @@ const ParadeController = require("../controllers/parade.controller");
 
 
 router.get('/', ParadeController.showAllparade);
-router.get('/searchParade/:id', ParadeController.searchParade);
+router.get('/ParadeTypes', ParadeController.showAllparadeType);
+router.get('/api/searchParade/:id', ParadeController.searchParade);
 //router.post('/createParade', ParadeController.createParade);
-router.post('/createParadeType/:id', ParadeController.addParadeType);
-router.delete('/deleteParadeById/:id', ParadeController.deleteParadeById);
-router.put('/updateParade/:id', ParadeController.updateParade);
+router.post('/api/createParadeType/:id', ParadeController.addParadeType);
+router.delete('/api/deleteParadeById/:id', ParadeController.deleteParadeById);
+router.put('/api/updateParade/:id', ParadeController.updateParade);
 //router.put('/updateParade/:id', ParadeController.updateParadeType);
 
 

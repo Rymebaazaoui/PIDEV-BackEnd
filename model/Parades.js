@@ -9,6 +9,7 @@ var Parade= new schema({
     Nb_inscription : Number,
     Type :[{ type: schema.Types.ObjectId, 
             ref: 'Type_parade' 
+            
         }]
 
 });

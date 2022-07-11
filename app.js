@@ -52,10 +52,12 @@ app.use(
 
 
 
-/*
+
 // API root
 app.use('/api', paradeRouter)
 app.use('/api', formationsRouter)
+app.use('/api', usersRouter)
+
 // PORT
 const port = process.env.PORT || 8000
 app.listen(port, () => {
@@ -84,6 +86,6 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
-});*/
+});
 
 module.exports = app;
