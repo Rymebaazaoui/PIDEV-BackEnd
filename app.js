@@ -42,7 +42,7 @@ app.use(cors());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/parade', paradeRouter);
-app.use('/formation', formationsRouter);
+app.use('/api/formation', formationsRouter);
 app.use('/user', UserRouter);
 app.use(cors());
 app.use(bodyParser.json())
@@ -52,7 +52,7 @@ app.use(
   }),
 )
 
-/*
+
 // API root
 app.use('/api', paradeRouter)
 app.use('/api', formationsRouter)
@@ -86,6 +86,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-*/
+
 
 module.exports = app;
