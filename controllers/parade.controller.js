@@ -10,6 +10,12 @@ module.exports = {
             
         });
     },
+    showAllparadeType: async(req,res) =>{
+      Type_parade.find((err, data)=>{
+          res.json(data);
+          
+      });
+  },
     searchParade: async(req,res) => {
       const id = req.params.id;
       Parade.findById(id)
