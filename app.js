@@ -21,6 +21,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var paradeRouter = require('./routes/Parades.route');
 var formationsRouter = require('./routes/formations.routes');
+var UserRouter = require('./routes/Users.route');
 var visiteRouter = require('./routes/visite.route');
 var app = express();
 app.get('/', function (req, res) {
@@ -41,6 +42,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/parade', paradeRouter);
 app.use('/formation', formationsRouter);
+app.use('/user', UserRouter);
+app.use(cors());
 app.use(bodyParser.json())
 app.use(
   bodyParser.urlencoded({
@@ -56,7 +59,7 @@ app.use('/api', paradeRouter)
 app.use('/api', formationsRouter)
 app.use('/api', visiteRouter)
 // PORT
-const port = process.env.PORT || 8000
+const port = process.env.PORT || 8200
 app.listen(port, () => {
   console.log('Listening on port ' + port)
 })
@@ -66,7 +69,7 @@ app.get('/', (req, res) => {
 })
 app.get('*', (req, res) => {
   res.sendFile(
-    path.join(__dirname, 'C:\Users\User\Desktop\Roue_Libre\RoueLibre\src\app\components\list-parade\list-parade.component.html'),
+    path.join(__dirname, )
   )
 })
 // catch 404 and forward to error handler
