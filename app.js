@@ -22,8 +22,7 @@ var usersRouter = require('./routes/users');
 var paradeRouter = require('./routes/Parades.route');
 var formationsRouter = require('./routes/formations.routes');
 var UserRouter = require('./routes/Users.route');
-
-
+var visiteRouter = require('./routes/visite.route');
 var app = express();
 app.get('/', function (req, res) {
   res.render('index', {});
@@ -56,7 +55,7 @@ app.use(
 // API root
 app.use('/api', paradeRouter)
 app.use('/api', formationsRouter)
-app.use('/api', UserRouter)
+app.use('/api', visiteRouter)
 // PORT
 const port = process.env.PORT || 8200
 app.listen(port, () => {
@@ -76,13 +75,13 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// error handler
+//error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
+//  render the error page
   res.status(err.status || 500);
   res.render('error');
 });
