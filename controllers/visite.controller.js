@@ -66,4 +66,29 @@ module.exports = {
                     .status(500)
                     .send({ message: "Erreur recuperation visite avec id=" + id });
             });
-    }}
+
+
+    },
+    addVisiteLieu : async(req,res)=>{
+
+        console.log(">>>>>>>>>");
+        console.log(req.body);
+        const { id } = req.params;
+        console.log(">>>>>>>>>");
+       Lieu=await Lieu.findById(id);
+        console.log(">>>>>>>>>"+Lieu);
+        var L= new Lieu({
+            Description : req.body.Description,
+            DateD: req.body.DateFin,
+            DateF: req.body.DateF,
+            Nom : Lieu
+        });
+        console.log("avant");
+
+        L.save();
+        res.send({
+            message: "Ajout effectué avec succès!"
+        });
+        console.log(L);
+    },
+}

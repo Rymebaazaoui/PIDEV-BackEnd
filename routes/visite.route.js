@@ -7,5 +7,7 @@ router.get('/', VisiteController.showAllvisite);
 router.post('/create', VisiteController.create);
 router.delete('/deleteVisite/:id', VisiteController.deleteVisiteById);
 router.get('/searchVisite/:id', VisiteController.searchVisite);
+router.post('/addLieu/:id', VisiteController.addVisiteLieu);
+
 
 module.exports = router;
