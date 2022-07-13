@@ -5,6 +5,4 @@ var type_Parade= new schema({
     Type: String,
 });
 
-var Type =mongoose.model('Type_parade', type_Parade);
-
-module.exports = Type;
+module.exports = mongoose.model('Type_parade', type_Parade);
