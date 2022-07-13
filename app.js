@@ -23,7 +23,9 @@ var paradeRouter = require('./routes/Parades.route');
 var formationsRouter = require('./routes/formations.routes');
 var visiteRouter = require('./routes/visite.route');
 var app = express();
-
+app.get('/', function (req, res) {
+  res.render('index', {});
+});
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -33,19 +35,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/parade', paradeRouter);
 app.use('/formation', formationsRouter);
-app.use('/visite', visiteRouter);
-app.use(cors());
 app.use(bodyParser.json())
 app.use(
   bodyParser.urlencoded({
     extended: false,
   }),
 )
+
+
+/*
+
 // API root
 app.use('/api', paradeRouter)
 app.use('/api', formationsRouter)
@@ -69,15 +74,15 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// error handler
+//error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
+//  render the error page
   res.status(err.status || 500);
   res.render('error');
 });
-
+*/
 module.exports = app;
