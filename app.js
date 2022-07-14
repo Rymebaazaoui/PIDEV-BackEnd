@@ -1,3 +1,29 @@
+const nodemailer =require("nodemailer");
+
+let mailTransporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user : "eya.hadrich@esprit.tn",
+    pass : "201SFT3445"
+  }
+})
+
+let details = {
+  from: "eya.hadrich@esprit.tn",
+  to: "marwa.jalleli@esprit.tn",
+  subject: "confirmation ",
+  text: "votre inscription est confirmé"
+
+}
+
+mailTransporter.sendMail(details,(err)=>{
+  if (err){
+    console.log("it has an error",err)
+  }
+  else {
+    console.log("email has sent !")
+  }
+})
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -21,6 +47,10 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var paradeRouter = require('./routes/Parades.route');
 var formationsRouter = require('./routes/formations.routes');
+
+var associationRouter = require('./routes/Association.route');
+
+
 var UserRouter = require('./routes/Users.route');
 var visiteRouter = require('./routes/visite.route');
 var app = express();
@@ -41,6 +71,8 @@ app.use(cors());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/parade', paradeRouter);
+app.use('/formation', formationsRouter);
+app.use('/association', associationRouter);
 app.use('/api/formation', formationsRouter);
 app.use('/user', UserRouter);
 app.use(cors());
