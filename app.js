@@ -11,8 +11,8 @@ let mailTransporter = nodemailer.createTransport({
 let details = {
   from: "eya.hadrich@esprit.tn",
   to: "marwa.jalleli@esprit.tn",
-  subject: "testing our nodemailer",
-  text: "testing our first sender"
+  subject: "confirmation ",
+  text: "votre inscription est confirmé"
 
 }
 

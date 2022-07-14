@@ -37,7 +37,31 @@ module.exports = {
                     .status(500)
                     .send({ message: "Erreur recuperation association avec id=" + id });
             });
-    }
+    },
+    addAssociationType: async (req, res) => {
+
+        console.log(">>>>>>>>>");
+        console.log(req.body);
+        const {id} = req.params;
+        console.log(">>>>>>>>>");
+        type_association = await type_association.findById(id);
+        console.log(">>>>>>>>>" + type_association);
+        var a = new Association({
+            Description: req.body.Description,
+            Nb_participant: req.body.Nb_participant,
+            Type: type_association
+        });
+        console.log("avant");
+
+        a.save();
+        res.send({
+            message: "Ajout effectué avec succès!"
+        });
+
+        console.log(a);
+    },
+
+
 
 
 
