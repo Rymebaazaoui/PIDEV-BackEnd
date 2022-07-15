@@ -2,8 +2,8 @@ var mongoose = require('mongoose');
 var schema = mongoose.Schema;
 
 var Reservation= new schema({
-    DateDeb: Date,
-    DateFin: Date,
+    DateDeb:String ,
+    DateFin: String,
     /*client:{Type:mongoose.Schema.Types.ObjectId,ref:'User'},*/
   /* velos:{
         Type: mongoose.Types.ObjectId,

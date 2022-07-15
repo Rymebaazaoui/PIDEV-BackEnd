@@ -18,14 +18,16 @@ filename: (req,file,cb)=>{
 });
 const upload = multer({storage});
 
-router.route ("/")
+/*router.route ("/")
       .post(upload.single('image'),veloController.createVelo)
       .get( upload.single('image'),veloController.showAllvelo);
+      */
+      router.get('/', VeloController.showAllvelo);
 
-      router.get('/searchVelo/:id', VeloController.searchVelo);
-      router.post('/createVelo', VeloController.createVelo);
-      router.delete('/deleteVeloById/:id', VeloController.deleteVeloById);
-      router.put('/updateVelo/:id', VeloController.updateVelo);
+      router.get('/api/searchVelo/:id', VeloController.searchVelo);
+      router.post('/api/createVelo', VeloController.createVelo);
+      router.delete('/api/deleteVeloById/:id', VeloController.deleteVeloById);
+      router.put('/api/updateVelo/:id', VeloController.updateVelo);
       
    
 

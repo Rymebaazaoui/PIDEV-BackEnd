@@ -3,8 +3,8 @@ const nodemailer = require('nodemailer');
     host: "smtp.mailtrap.io",
     port: 2525,
     auth: {
-      user: "49dc8a0aa2ba51",
-      pass: "520521cc4f7328"
+      user: "d23597df5ed782",
+      pass: "daa20617b1cb2f"
     }
   })
   message = {
