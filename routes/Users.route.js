@@ -5,10 +5,10 @@ const usersController = require("../controllers/users.controller");
 
 
 router.get('/', usersController.showAlluser);
-router.post('/createUser', usersController.createUser);
-router.delete('/deleteUser/:id', usersController.deleteUserById);
-router.put('/updateUser/:id',usersController.updateUser);
-router.get('/searchUser/:id', usersController.searchUser);
+router.post('/api/createUser', usersController.createUser);
+router.delete('/api/deleteUser/:id', usersController.deleteUserById);
+router.put('/api/updateUser/:id',usersController.updateUser);
+router.get('/api/searchUser/:id', usersController.searchUser);
 
 
 
