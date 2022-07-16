@@ -1,9 +1,7 @@
 var express = require('express');
 var router = express.Router();
-
 var type_Formation = require('../model/type_formation');
 var Type_parade = require('../model/Type_parade');
-
 
 /* GET users listing. */
 router.post('/', async(req, res) => {
