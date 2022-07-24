@@ -6,6 +6,7 @@ var Visite = new schema({
     DateF: Date,
     nom: { type: schema.Types.ObjectId, ref: "lieu" },
 });
+
 var visites = mongoose.model("Visite", Visite);
 
 module.exports = visites;

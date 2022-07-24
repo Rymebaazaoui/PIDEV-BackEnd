@@ -47,7 +47,6 @@ var usersRouter = require("./routes/users");
 var paradeRouter = require("./routes/Parades.route");
 var formationsRouter = require("./routes/formations.routes");
 
-
 var UserRouter = require("./routes/Users.route");
 var visiteRouter = require("./routes/visite.route");
 var app = express();
@@ -57,7 +56,6 @@ app.get("/", function (req, res) {
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
-
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
