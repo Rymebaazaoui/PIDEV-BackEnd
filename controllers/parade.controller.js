@@ -1,6 +1,7 @@
 const parade = require('../model/Parades');
 var Parade = require('../model/Parades');
-var Type_parade = require('../model/Type_parade');
+const type_parade = require('../model/Type_parade');
+const Inscription_parade = require('../model/Inscription_parade');
 
 module.exports = {
   
@@ -11,10 +12,17 @@ module.exports = {
         });
     },
     showAllparadeType: async(req,res) =>{
-      Type_parade.find((err, data)=>{
+      type_parade.find((err, data)=>{
           res.json(data);
           
       });
+  },
+
+  showAllInscription: async(req,res) =>{
+    Inscription_parade.find((err, data)=>{
+        res.json(data);
+        
+    });
   },
     searchParade: async(req,res) => {
       const id = req.params.id;
@@ -31,6 +39,21 @@ module.exports = {
         });
     },
 
+    searchParadeByLieu: async(req,res) => {
+      const Lieu = req.params.Lieu;
+      Parade.find(Lieu)
+        .then(data => {
+          if (!data)
+            res.status(404).send({ message: "lieu introuvable pour id " + Lieu });
+          else res.send(data);
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .send({ message: "Erreur recuperation parade avec lieu=" + Lieu });
+        });
+    },
+
 
     addParadeType : async(req,res)=>{
 
@@ -38,7 +61,7 @@ module.exports = {
     console.log(req.body);
     const { id } = req.params;
     console.log(">>>>>>>>>");
-    Type_parade=await Type_parade.findById(id);
+    Type_parade =await type_parade.findById(id);
     console.log(">>>>>>>>>"+Type_parade);
     var f= new parade({
     //  dateRecp : req.body.dateRecp
@@ -55,6 +78,30 @@ module.exports = {
   console.log("parade ajouté avec succes ");
   console.log(f);
     },
+
+    addInscriptionParade : async(req,res)=>{
+
+      console.log(">>>>>>>>>");
+      console.log(req.body);
+      const { id } = req.params;
+      console.log(">>>>>>>>>");
+      parade_ins = await Parade.findById(id);
+      console.log(">>>>>>>>>"+parade_ins);
+      var f= new Inscription_parade({
+      //  dateRecp : req.body.dateRecp
+      //dateAjout: {type:Date,default:Date.now},	
+      Nom: req.body.Nom,			
+      Prenom: req.body.Prenom,		
+      Mail: req.body.Mail,
+      Parade : parade_ins,
+    });
+    console.log("avant");
+  
+    f.save();
+    res.send("Ajout inscription effectué avec succes")
+    console.log("Inscrit avec succes ");
+    console.log(f);
+      },
 
     createParade: async(req,res) =>{
 
@@ -83,6 +130,27 @@ module.exports = {
         });
       });
       },
+
+      deleteInscriptionById: async (req, res) => {
+        const id = req.params.id;
+        Inscription_parade.findByIdAndRemove(id)
+        .then(data => {
+          if (!data) {
+            res.status(404).send({
+              message: `Impossible de supprimer inscription avec id=${id}. parade est possiblement introuvable!`
+            });
+          } else {
+            res.send({
+              message: "inscription supprimée avec succès!"
+            });
+          }
+        })
+        .catch(err => {
+          res.status(500).send({
+            message: "Impossible de supprimer inscription avec id=" + id
+          });
+        });
+        },
 
     updateParade: async (req,res, next) => {
 

@@ -6,11 +6,16 @@
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@okta/okta-auth-js": "5.9.1",
     "cookie-parser": "~1.4.4",
+=======
+    "cookie-parser":   "~1.4.4",
+>>>>>>> 7c5e66b8d60cae69406c3f21654f136f2ba07aaf
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "express": "~4.16.1",
+    "googleapis": "^105.0.0",
     "geolib": "^3.3.3",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",

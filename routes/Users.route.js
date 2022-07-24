@@ -4,6 +4,7 @@ var router = express.Router();
 const usersController = require("../controllers/users.controller");
 
 
+
 router.get('/getAll', usersController.showAlluser);
 router.post('/createUser', usersController.createUser);
 router.delete('/deleteUser/:id', usersController.deleteUserById);
