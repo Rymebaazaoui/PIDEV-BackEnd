@@ -1,4 +1,13 @@
+
 const nodemailer = require("nodemailer");
+var createError = require('http-errors');
+var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var cors = require('cors');
+const bodyParser = require('body-parser');
+var logger = require('morgan');
+
 
 let mailTransporter = nodemailer.createTransport({
   service: "gmail",
@@ -22,13 +31,6 @@ mailTransporter.sendMail(details, (err) => {
     console.log("email has sent !");
   }
 });
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var cors = require("cors");
-const bodyParser = require("body-parser");
-var logger = require("morgan");
 
 var mongoose = require("mongoose");
 mongoose
@@ -46,9 +48,10 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var paradeRouter = require("./routes/Parades.route");
 var formationsRouter = require("./routes/formations.routes");
-
 var UserRouter = require("./routes/Users.route");
 var visiteRouter = require("./routes/visite.route");
+var associationRouter = require('./routes/Association.route');
+
 var app = express();
 app.get("/", function (req, res) {
   res.render("index", {});
@@ -63,13 +66,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 
+
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/parade", paradeRouter);
 app.use("/formation", formationsRouter);
 app.use("/api/formation", formationsRouter);
-//new add
-
+app.use('/association', associationRouter);
 app.use("/api/user", UserRouter);
 app.use(cors());
 app.use(bodyParser.json());
@@ -83,6 +86,8 @@ app.use(
 app.use("/api", paradeRouter);
 app.use("/api", formationsRouter);
 app.use("/api/visite", visiteRouter);
+app.use('/api', visiteRouter)
+app.use('/', UserRouter)
 
 // PORT
 const port = process.env.PORT || 8000;
@@ -97,6 +102,7 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname));
 });
 // catch 404 and forward to error handler
+
 app.use(function (req, res, next) {
   next(createError(404));
 });
