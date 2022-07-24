@@ -4,12 +4,16 @@ var router = express.Router();
 const usersController = require("../controllers/users.controller");
 
 
-router.get('/', usersController.showAlluser);
+router.get('/getAll', usersController.showAlluser);
 router.post('/createUser', usersController.createUser);
 router.delete('/deleteUser/:id', usersController.deleteUserById);
 router.put('/updateUser/:id',usersController.updateUser);
-router.get('/searchUser/:id', usersController.searchUser);
-
+router.get('/getUser/:id', usersController.getUseById);
+router.get('/searchUserAgeMoins',usersController.getUsersWhereAgeMoins);
+router.get('/searchUserAgePlus',usersController.getUsersWhereAgePlus);
+router.get('/searchUserEqualAge',usersController.getUsersWhereAgeEquals);
+router.get('/searchUserByName',usersController.searchUserByName);
+router.post('/login',usersController.login);
 
 
 

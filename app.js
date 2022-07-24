@@ -16,8 +16,7 @@ mongoose.connect("mongodb+srv://rymbaazaoui88:26zILzBRSWAoARtd@cluster0.lwsfmob.
 }
 );
 
-
-var indexRouter = require('./routes/index');
+//var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var paradeRouter = require('./routes/Parades.route');
 var formationsRouter = require('./routes/formations.routes');
@@ -38,18 +37,14 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
-app.use('/', indexRouter);
+//app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/parade', paradeRouter);
 app.use('/api/formation', formationsRouter);
-app.use('/user', UserRouter);
+app.use('/api/user', UserRouter);
 app.use(cors());
 app.use(bodyParser.json())
-app.use(
-  bodyParser.urlencoded({
-    extended: false,
-  }),
-)
+app.use( bodyParser.urlencoded({extended: false, }),)
 
 
 
@@ -58,6 +53,7 @@ app.use(
 app.use('/api', paradeRouter)
 app.use('/api', formationsRouter)
 app.use('/api', visiteRouter)
+app.use('/', UserRouter)
 // PORT
 const port = process.env.PORT || 8200
 app.listen(port, () => {
@@ -74,7 +70,7 @@ app.get('*', (req, res) => {
 })
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+ next(createError(404));
 });
 
 //error handler
