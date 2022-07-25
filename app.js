@@ -1,9 +1,10 @@
-
 const nodemailer = require("nodemailer");
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+const axios = require("axios");
+var wikipedia = require("node-wikipedia");
 var cors = require('cors');
 const bodyParser = require('body-parser');
 var logger = require('morgan');
@@ -32,6 +33,7 @@ mailTransporter.sendMail(details, (err) => {
   }
 });
 
+
 var mongoose = require("mongoose");
 mongoose
     .connect(
@@ -51,11 +53,24 @@ var formationsRouter = require("./routes/formations.routes");
 //var UserRouter = require("./routes/Users.route");
 var visiteRouter = require("./routes/visite.route");
 var associationRouter = require('./routes/Association.route');
+var veloRouter = require('./routes/Velos.route');
+var reservationRouter = require('./routes/Reservations.route');
+var postsRouter = require('./routes/posts');
+var commentsRouter = require('./routes/comments');
 
 var app = express();
 app.get("/", function (req, res) {
   res.render("index", {});
 });
+var  Po = require("./controllers/postController");
+var  Comm= require ("./controllers/commentController");
+app.get("/posts/:title",Po.getAllComments );
+app.post("/posts/create", Po.create);
+app.post("/posts/like/:id", Po.Like);
+app.post("/posts/dislike/:id", Po.Dislike);
+app.post("/posts/rate/:id", Po.Rate);
+app.get("/posts/search/:key", Po.Search);
+app.get("/comments/search/:key",Comm.Search);
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
@@ -63,7 +78,8 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'uploads')));
 app.use(cors());
 
 
@@ -73,12 +89,16 @@ app.use("/users", usersRouter);
 app.use("/parade", paradeRouter);
 app.use("/formation", formationsRouter);
 app.use("/api/formation", formationsRouter);
+app.use('/api/velo', veloRouter);
+/*app.use('/api/reservation', reservationRouter);*/
 app.use('/association', associationRouter);
 //app.use("/api/user", UserRouter);
 
 
-app.use(cors());
-app.use(bodyParser.json());
+app.use('/uploads', express.static(path.join('image')));
+
+app.use(bodyParser.json())
+
 app.use(
 
     bodyParser.urlencoded({
@@ -91,14 +111,33 @@ app.use(
 app.use("/api", paradeRouter);
 app.use("/api", formationsRouter);
 app.use("/api/visite", visiteRouter);
-app.use('/api', visiteRouter)
-
+app.use('/api', visiteRouter);
+app.use('/api', veloRouter)
+app.use('/api', reservationRouter)
 app.use('/api', UserRouter)
+app.use('/api', visiteRouter)
+app.use('/posts', postsRouter);
+app.use('/comments', commentsRouter);
+app.get("/api", (req,res)=>{
+  const options = {
+    method: 'GET',
+    url: 'https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/WebSearchAPI',
+    params: {q: 'Elon musk', pageNumber: '1', pageSize: '10', autoCorrect: 'true'},
+    headers: {
+     'X-RapidAPI-Key': '96e632b31fmsh9de398c0db55bd7p17fb9ejsn53235349f43e',
+    'X-RapidAPI-Host': 'contextualwebsearch-websearch-v1.p.rapidapi.com'
+    }
+  };
+  
+  axios.request(options).then(function (response) {
+    console.log(response.data);
+  }).catch(function (error) {
+    console.error(error);
+  });
+  
 
-
-//app.use('/', UserRouter)
-
-
+  
+  });
 
 // PORT
 const port = process.env.PORT || 8000;
@@ -106,6 +145,17 @@ app.listen(port, () => {
   console.log("Listening on port " + port);
 });
 // Base Route
+
+app.get('/', (req, res) => {
+  res.send('invaild endpoint')
+})
+app.get('*', (req, res) => {
+  res.sendFile(
+    path.join(__dirname, )
+  )
+})
+
+
 app.get("/", (req, res) => {
   res.send("invaild endpoint");
 });

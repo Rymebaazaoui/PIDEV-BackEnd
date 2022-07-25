@@ -6,6 +6,7 @@ var Parade= new schema({
     DateDeb: Date,
     DateFin: Date,
     Lieu : String,
+    Lieu : String,
     Nb_inscription : Number,
     Type :[{ type: schema.Types.ObjectId, 
             ref: 'Type_parade' 
