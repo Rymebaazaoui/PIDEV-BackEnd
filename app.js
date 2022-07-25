@@ -42,7 +42,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/parade', paradeRouter);
 app.use('/formation', formationsRouter);
-app.use('/user', UserRouter);
+app.use('/api/user', UserRouter);
 app.use(cors());
 app.use(bodyParser.json())
 app.use(
@@ -52,12 +52,12 @@ app.use(
 )
 
 
-/*
 
 // API root
 app.use('/api', paradeRouter)
 app.use('/api', formationsRouter)
 app.use('/api', visiteRouter)
+app.use('/api', UserRouter)
 // PORT
 const port = process.env.PORT || 8200
 app.listen(port, () => {
@@ -87,5 +87,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-*/
+
 module.exports = app;
