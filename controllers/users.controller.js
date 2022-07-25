@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 
 
 module.exports = {
+
   login: async (req, res, next) => {
     const { email, mdp } = req.body
     // Check if username and password is provided
@@ -64,7 +65,49 @@ module.exports = {
               res.status(500).send({
                   message: "Erreur mise à jour avec id=" + id
               });
+
+  showAlluser: async(_req,res) =>{
+    User.find((_err, data)=>{
+      res.json(data);
+
+    });
+  },
+  createUser: async(req,res) =>{
+    const user = new User({...req.body});
+    console.log(user);
+    user.save();
+    res.json(user);
+
+  },
+  /* createUser: async(req,res) =>{
+
+       const user = new User({ ...req.body});
+       await user.save();
+       res.json(user);
+
+   },*/
+  /*deleteUserById: async (req, res) => {
+      const { id } = req.params;
+      await User.findByIdAndRemove({ _id: id });
+
+  }*/
+  updateUser: async(req,res) => {
+    const id  = req.params.id;
+    console.log(id)
+    User.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+        .then(data => {
+          if (!data) {
+            res.status(404).send({
+              message: `Impossible de mettre à jour user avec id=${id}!`
+            });
+          } else res.send({ message: "utilisateur mise à jour avec succès." });
+        })
+        .catch(() => {
+          res.status(500).send({
+            message: "Erreur mise à jour avec id=" + id
+
           });
+        });
   },
 
 
@@ -81,11 +124,10 @@ module.exports = {
           .send({ message: "Erreur recuperation utilisateur avec id=" + id });
       });
   },
-  
-  
-    deleteUserById: async (req, res) => {
-        const id = req.params.id;
-        User.findByIdAndRemove(id)
+ 
+  deleteUserById: async (req, res) => {
+    const id = req.params.id;
+    User.findByIdAndRemove(id)
         .then(data => {
           if (!data) {
             res.status(404).send({
@@ -102,7 +144,9 @@ module.exports = {
             message: "Impossible de supprimer utilisateur avec id=" + id
           });
         });
-        },
+  },
+
+
 
     getUsersWhereAgeMoins: async (req, res) => {
       try {
@@ -199,3 +243,6 @@ const getAge = (birthDate) => {
   console.log(age);
   return age;
 };
+
+}
+
