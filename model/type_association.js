@@ -5,6 +5,6 @@ var type_association= new schema({
     Type: String,
 });
 
-var Type =mongoose.model('Type_association', type_association);
+var TypeAssociation =mongoose.model('Type_association', type_association);
 
-module.exports = Type;
+module.exports = TypeAssociation;
