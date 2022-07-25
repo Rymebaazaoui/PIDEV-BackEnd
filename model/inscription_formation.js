@@ -2,9 +2,9 @@ var mongoose = require('mongoose');
 var schema = mongoose.Schema;
 
 var InscriptionFormation= new schema({
-    Nom : String,
-    Prenom : String,
-    Mail : String,
+    nom : String,
+    prenom : String,
+    mail : String,
     Formation :[{ type: schema.Types.ObjectId, 
             ref: 'Formations' 
             
