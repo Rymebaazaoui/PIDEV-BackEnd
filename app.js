@@ -74,6 +74,7 @@ app.use("/formation", formationsRouter);
 app.use("/api/formation", formationsRouter);
 app.use('/association', associationRouter);
 //app.use("/api/user", UserRouter);
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(

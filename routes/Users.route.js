@@ -1,7 +1,8 @@
-var express = require('express');
-var router = express.Router();
-//var User = require('../model/Users.model');
-const usersController = require("../controllers/users.controller");
+// var express = require('express');
+// var router = express.Router();
+// //var User = require('../model/Users.model');
+// const usersController = require("../controllers/users.controller");
+
 
 
 /*
@@ -18,6 +19,4 @@ router.post('/login',usersController.login);
 
 */
 
-
-
-module.exports = router;
+// module.exports = router;
