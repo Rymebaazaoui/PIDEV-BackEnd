@@ -9,7 +9,7 @@ router.get('/', ParadeController.showAllparade);
 router.get('/ParadeTypes', ParadeController.showAllparadeType);
 router.get('/InscriptionParade', ParadeController.showAllInscription);
 router.get('/searchParade/:id', ParadeController.searchParade);
-router.get('/searchParadeParLieu/:Lieu', ParadeController.searchParadeByLieu);
+router.post('/searchParadeParLieu', ParadeController.searchParadeByLieu);
 //router.post('/createParade', ParadeController.createParade);
 router.post('/api/createParadeType/:id', ParadeController.addParadeType);
 router.post('/createInscriptionParade/:id', ParadeController.addInscriptionParade);

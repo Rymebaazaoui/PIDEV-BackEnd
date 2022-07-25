@@ -48,7 +48,7 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var paradeRouter = require("./routes/Parades.route");
 var formationsRouter = require("./routes/formations.routes");
-var UserRouter = require("./routes/Users.route");
+//var UserRouter = require("./routes/Users.route");
 var visiteRouter = require("./routes/visite.route");
 var associationRouter = require('./routes/Association.route');
 
@@ -73,7 +73,7 @@ app.use("/parade", paradeRouter);
 app.use("/formation", formationsRouter);
 app.use("/api/formation", formationsRouter);
 app.use('/association', associationRouter);
-app.use("/api/user", UserRouter);
+//app.use("/api/user", UserRouter);
 app.use(cors());
 app.use(bodyParser.json());
 app.use(
@@ -87,7 +87,7 @@ app.use("/api", paradeRouter);
 app.use("/api", formationsRouter);
 app.use("/api/visite", visiteRouter);
 app.use('/api', visiteRouter)
-app.use('/', UserRouter)
+//app.use('/', UserRouter)
 
 // PORT
 const port = process.env.PORT || 8000;

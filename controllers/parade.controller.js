@@ -41,7 +41,7 @@ module.exports = {
     },
 
     searchParadeByLieu: async(req,res) => {
-      const Lieu = req.params.Lieu;
+      const Lieu = req.body;
       Parade.find(Lieu)
         .then(data => {
           if (!data)
@@ -64,9 +64,9 @@ module.exports = {
     console.log(">>>>>>>>>");
     Type_parade =await type_parade.findById(id);
     console.log(">>>>>>>>>"+Type_parade);
-    var f= new parade({
-    //  dateRecp : req.body.dateRecp
-    //dateAjout: {type:Date,default:Date.now},	
+    var f= new parade({	
+    DateDeb: req.body.DateDeb,
+    DateFin: req.body.DateFin,
     Description: req.body.Description,			
     Nb_inscription: req.body.Nb_inscription,		
     Lieu: req.body.Lieu,
