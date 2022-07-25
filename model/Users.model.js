@@ -3,9 +3,11 @@ var Schema = mongoose.Schema;
 var User = new Schema({
    nom: String,
     prenom:String,
-    date_naissance: String,
+    date_naissance: Date,
     email: String,
-   mdp: String
+   mdp: String,
+   Role :String,
+
 }
 
 );

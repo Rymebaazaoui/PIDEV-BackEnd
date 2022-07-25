@@ -5,8 +5,8 @@ var Formation = new Schema({
     NomFormateur:String,
     Description: String,
     NombreDeParticiants: Number,
-    DateDebut: String,
-    DateFin: String,
+    DateDebut: Date,
+    DateFin: Date,
 
     Type :[{ type: Schema.Types.ObjectId, 
         ref: 'type_formation' 
@@ -15,7 +15,7 @@ var Formation = new Schema({
  //{ timestamps: true }
 );
 
-var Formation =mongoose.model('formations', Formation);
+var formation =mongoose.model('formations', Formation);
 
-module.exports = Formation;
+module.exports = formation;
 
