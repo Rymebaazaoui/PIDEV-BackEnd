@@ -2,6 +2,7 @@ const parade = require('../model/Parades');
 var Parade = require('../model/Parades');
 const type_parade = require('../model/Type_parade');
 const Inscription_parade = require('../model/Inscription_parade');
+const nodemailer = require("nodemailer");
 
 module.exports = {
   
@@ -40,7 +41,7 @@ module.exports = {
     },
 
     searchParadeByLieu: async(req,res) => {
-      const Lieu = req.params.Lieu;
+      const Lieu = req.body;
       Parade.find(Lieu)
         .then(data => {
           if (!data)
@@ -63,9 +64,9 @@ module.exports = {
     console.log(">>>>>>>>>");
     Type_parade =await type_parade.findById(id);
     console.log(">>>>>>>>>"+Type_parade);
-    var f= new parade({
-    //  dateRecp : req.body.dateRecp
-    //dateAjout: {type:Date,default:Date.now},	
+    var f= new parade({	
+    DateDeb: req.body.DateDeb,
+    DateFin: req.body.DateFin,
     Description: req.body.Description,			
     Nb_inscription: req.body.Nb_inscription,		
     Lieu: req.body.Lieu,
@@ -87,9 +88,7 @@ module.exports = {
       console.log(">>>>>>>>>");
       parade_ins = await Parade.findById(id);
       console.log(">>>>>>>>>"+parade_ins);
-      var f= new Inscription_parade({
-      //  dateRecp : req.body.dateRecp
-      //dateAjout: {type:Date,default:Date.now},	
+      var f= new Inscription_parade({	
       Nom: req.body.Nom,			
       Prenom: req.body.Prenom,		
       Mail: req.body.Mail,
@@ -101,6 +100,29 @@ module.exports = {
     res.send("Ajout inscription effectué avec succes")
     console.log("Inscrit avec succes ");
     console.log(f);
+    let mailTransporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+          user : "samar.daghari@esprit.tn",
+          pass : "201SFT2941"
+      }
+    })
+    let details = {
+      from: "samar.daghari@esprit.tn",
+      to: req.body.Mail,
+      subject: "Confirmation Inscription Parade ",
+      text: "votre inscription" +parade_ins.Description+ "est confirmé.\n Lieu : "+parade_ins.Lieu+"\n"
+    
+    }
+    
+    mailTransporter.sendMail(details,(err)=>{
+      if (err){
+        console.log("it has an error",err)
+      }
+      else {
+        console.log("check your emails !")
+      }
+    })
       },
 
     createParade: async(req,res) =>{

@@ -5,7 +5,6 @@ const Type_Formation= require('../model/type_formation');
 const Inscription_formation= require('../model/inscription_formation');
 const nodemailer =require("nodemailer");
 
-
 module.exports = {
   
     showAllformations: async(req,res) =>{
