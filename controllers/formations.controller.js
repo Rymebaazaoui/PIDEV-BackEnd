@@ -3,7 +3,6 @@ const Formation = require('../model/formations.model');
 let  formations = require('../model/formations.model')
 var type_Formation= require('../model/type_formation');
 
-
 module.exports = {
   
     showAllformations: async(req,res) =>{
