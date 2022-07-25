@@ -2,8 +2,11 @@ var mongoose = require('mongoose');
 var schema = mongoose.Schema;
 
 var Reservation= new schema({
-    DateDeb:String ,
-    DateFin: String,
+    Nom : String,
+    Prenom : String,
+    Mail : String,
+    DateDeb: Date ,
+    DateFin: Date,
     /*client:{Type:mongoose.Schema.Types.ObjectId,ref:'User'},*/
   /* velos:{
         Type: mongoose.Types.ObjectId,
@@ -13,6 +16,7 @@ var Reservation= new schema({
 Velo :[{ type: schema.Types.ObjectId, 
     ref: 'Velos' 
 }]
+
 });
 var reservation =mongoose.model('Reservations', Reservation);
 

@@ -1,6 +1,6 @@
 const parade = require('../model/Parades');
 var Parade = require('../model/Parades');
-
+const type_parade = require('../model/Type_parade');
 
 module.exports = {
   
@@ -10,6 +10,12 @@ module.exports = {
             
         });
     },
+    showAllparadeType: async(req,res) =>{
+      type_parade.find((err, data)=>{
+          res.json(data);
+          
+      });
+  },
     searchParade: async(req,res) => {
       const id = req.params.id;
       Parade.findById(id)
@@ -23,6 +29,31 @@ module.exports = {
             .status(500)
             .send({ message: "Erreur recuperation parade avec id=" + id });
         });
+    },
+
+
+    addParadeType : async(req,res)=>{
+
+    console.log(">>>>>>>>>");
+    console.log(req.body);
+    const { id } = req.params;
+    console.log(">>>>>>>>>");
+    Type_parade =await type_parade.findById(id);
+    console.log(">>>>>>>>>"+Type_parade);
+    var f= new parade({
+    //  dateRecp : req.body.dateRecp
+    //dateAjout: {type:Date,default:Date.now},	
+    Description: req.body.Description,			
+    Nb_inscription: req.body.Nb_inscription,		
+    Lieu: req.body.Lieu,
+    Type : Type_parade,
+  });
+  console.log("avant");
+
+  f.save();
+  res.send("Ajout effectué avec succes")
+  console.log("parade ajouté avec succes ");
+  console.log(f);
     },
 
     createParade: async(req,res) =>{
@@ -61,10 +92,11 @@ module.exports = {
               return next(error);
               console.log(error)
             } else {
-                res.send({
-                    message: "parade was updated successfully!"
-                  });
+             // res.json(data)
+             res.send({
+              message: "Parade was updated successfully!"
+            });
             }
           })
-        }
+        }      
 }

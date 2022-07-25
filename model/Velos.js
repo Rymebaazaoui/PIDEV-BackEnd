@@ -7,6 +7,10 @@ var Velo = new schema({
     prix: Number,
     description: String,
     quantite: Number,
+    Type :[{ type: schema.Types.ObjectId, 
+        ref: 'Type_velo' 
+        
+    }]
 
 
 });
