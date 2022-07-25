@@ -67,6 +67,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 
 
+
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/parade", paradeRouter);
@@ -75,20 +76,29 @@ app.use("/api/formation", formationsRouter);
 app.use('/association', associationRouter);
 //app.use("/api/user", UserRouter);
 
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(
+
     bodyParser.urlencoded({
       extended: false,
     })
 );
+
 
 // API root
 app.use("/api", paradeRouter);
 app.use("/api", formationsRouter);
 app.use("/api/visite", visiteRouter);
 app.use('/api', visiteRouter)
+
+app.use('/api', UserRouter)
+
+
 //app.use('/', UserRouter)
+
+
 
 // PORT
 const port = process.env.PORT || 8000;
