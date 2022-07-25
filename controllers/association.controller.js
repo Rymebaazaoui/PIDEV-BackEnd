@@ -1,4 +1,7 @@
 const Association = require('../model/association');
+const TypeAssociation = require('../model/type_association')
+const inscription_Association = require('../model/inscription_association')
+
 module.exports = {
 
     showType: async (req, res) => {
